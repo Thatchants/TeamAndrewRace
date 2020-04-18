@@ -11,6 +11,8 @@ import java.awt.image.BufferedImage;
 public class RaceWindow extends JFrame implements MouseListener {
 
     public boolean loggedIn = false;
+    public boolean validIP = false;
+
     private Race race;
     private BufferedImage image;
     public IPInput ipInput;
@@ -23,6 +25,8 @@ public class RaceWindow extends JFrame implements MouseListener {
         setSize(500, 500);
         setVisible(true);
         image = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_RGB);
+        add(ipInput);
+        setLayout(null);
     }
 
     public void update(Graphics g){
@@ -44,6 +48,10 @@ public class RaceWindow extends JFrame implements MouseListener {
             g2d.fillRect(0, 0, image.getWidth(), image.getHeight());
         }
         g2d.dispose();
+    }
+
+    public void ping(){
+        validIP = true;
     }
 
     @Override

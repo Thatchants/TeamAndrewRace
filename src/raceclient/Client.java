@@ -21,7 +21,7 @@ public class Client extends Thread{
 		} catch (SocketException e) {
 			e.printStackTrace();
 		} catch (UnknownHostException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		this.race = race;
 		
@@ -46,6 +46,7 @@ public class Client extends Thread{
 		if(type.equals("0")) {//Ping
 			System.out.flush();
 			System.out.println("Received Pong from Server");
+			race.window.ping();
 		}else if(type.equals("1")) {
 			PacketLogin packet = new PacketLogin(data);
 			System.out.println("Logged in as " + packet.getUsername());
@@ -62,7 +63,7 @@ public class Client extends Thread{
 		try {
 			this.socket.send(sendPacket);
 		} catch (IOException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 	}
 

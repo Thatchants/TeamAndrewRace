@@ -7,7 +7,7 @@ import java.net.UnknownHostException;
 
 public class Race extends Thread{
 	private Client client;
-	private RaceWindow window;
+	public RaceWindow window;
 	public Race() {
 		client = new Client(this, "default");
 		window = new RaceWindow("Race", this);
@@ -51,6 +51,7 @@ public class Race extends Thread{
 						IPInput is its own class cause possibly i can style it there?
 						 */
 					} catch (UnknownHostException e) {
+						window.validIP = false;
 						e.printStackTrace();
 					}
 				}
