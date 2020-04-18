@@ -43,6 +43,9 @@ public class Server extends Thread{
 		}else if(type.equals("1")) {
 			PacketLogin packet = new PacketLogin(data);
 			serverHandler.addPlayer(packet, address, port);
+		}else if(type.equals("2")){
+			PacketDisconnect packet = new PacketDisconnect(data);
+			serverHandler.removePlayer(packet, address, port);
 		}
 	}
 	

@@ -49,6 +49,8 @@ public class Client extends Thread{
 		}else if(type.equals("1")) {
 			PacketLogin packet = new PacketLogin(data);
 			System.out.println("Logged in as " + packet.getUsername());
+		}else if(type.equals("2")){
+			System.out.println("Disconnected");
 		}else if(type.equals("3")) {
 			race.receiveObstacle();
 		}

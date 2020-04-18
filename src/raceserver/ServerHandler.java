@@ -2,6 +2,7 @@ package raceserver;
 
 import java.net.InetAddress;
 
+import packets.PacketDisconnect;
 import packets.PacketLogin;
 
 public class ServerHandler extends Thread{
@@ -47,6 +48,16 @@ public class ServerHandler extends Thread{
 					System.out.println(players[i].username + " logged in as player " + (i+1));
 					server.sendData(packet, address, port);
 				}
+			}
+		}
+	}
+
+	public void removePlayer(PacketDisconnect packet, InetAddress address, int port){
+		for(int i = 0;i<2;i++){
+			if(players[i] != null && players[i].username.equals(packet.getUsername())){
+				System.out.println(players[i].username + " disconnected as player " + (i+1));
+				players[i] = null;
+				server.sendData(packet, address, port);
 			}
 		}
 	}
