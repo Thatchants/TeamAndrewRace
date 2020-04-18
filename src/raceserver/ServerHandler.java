@@ -8,10 +8,12 @@ public class ServerHandler extends Thread{
 	public Server server;
 	private ObstacleSpawner spawner;
 	public PlayerMP[] players;
+	private ServerWindow window;
 	public ServerHandler() {
 		players = new PlayerMP[2];
 		server = new Server(this);
 		spawner = new ObstacleSpawner(server);
+		window = new ServerWindow("Server", this);
 	}
 	
 	private void init() {
@@ -30,6 +32,8 @@ public class ServerHandler extends Thread{
 			lastTime = currentTime;
 			
 			while(change >= 1) {
+				window.repaint();
+				change--;
 			}
 		}
 	}

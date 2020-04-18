@@ -5,7 +5,7 @@ import packets.*;
 public class Race extends Thread{
 	private Client client;
 	public Race() {
-		client = new Client(this, "localhost");
+		client = new Client(this, "70.95.208.226");
 	}
 	
 	public void init() {
