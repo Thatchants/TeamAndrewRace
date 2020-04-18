@@ -15,16 +15,6 @@ public class Race extends Thread{
 	
 	public void init() {
 		client.start();
-		String username = "andrew";
-		PacketLogin packet = new PacketLogin(username);
-		client.sendData(packet);
-		try {
-			Thread.sleep(25000);
-		}catch(Exception e){
-
-		}
-		PacketDisconnect disconnect = new PacketDisconnect(username);
-		client.sendData(disconnect);
 	}
 	
 	public void run() {
