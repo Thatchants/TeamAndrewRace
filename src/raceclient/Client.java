@@ -65,4 +65,8 @@ public class Client extends Thread{
 			e.printStackTrace();
 		}
 	}
+
+	public void changeServerIP(String address) throws UnknownHostException {
+		serverAddress = InetAddress.getByName(address);
+	}
 }
