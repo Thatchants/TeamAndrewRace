@@ -2,9 +2,11 @@ package raceserver;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 
-public class ServerWindow extends JFrame {
+public class ServerWindow extends JFrame implements MouseListener {
 
     ServerHandler server;
     BufferedImage image;
@@ -41,5 +43,30 @@ public class ServerWindow extends JFrame {
             }
         }
         g2d.dispose();
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
     }
 }
