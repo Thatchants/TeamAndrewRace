@@ -1,8 +1,10 @@
 package raceclient.display;
 
+import packets.PacketLogin;
 import raceclient.Race;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -28,13 +30,18 @@ public class RaceWindow extends JFrame implements MouseListener {
         layers.add(ipInput, JLayeredPane.POPUP_LAYER);
         setContentPane(layers);
         setLayout(null);
+        addMouseListener(this);
     }
 
 
 
     @Override
     public void mouseClicked(MouseEvent mouseEvent) {
-
+        if(mouseEvent.getY() > 100){
+            if(this.ipInput.getBackground().equals(Color.GREEN)){
+                race.tryLogin("Username Here");
+            }
+        }
     }
 
     @Override

@@ -49,6 +49,11 @@ public class Race extends Thread{
 		obstacles++;
 		System.out.println(obstacles);
 	}
+
+	public void tryLogin(String username){
+		Packet PacketLogin = new PacketLogin(username);
+		client.sendData(PacketLogin);
+	}
 	
 	public static void main(String[] args) {
 		new Race().start();
