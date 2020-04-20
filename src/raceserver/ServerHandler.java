@@ -33,7 +33,7 @@ public class ServerHandler extends Thread{
 			lastTime = currentTime;
 			
 			while(change >= 1) {
-				window.repaint();
+				window.graphics.repaint();
 				change--;
 			}
 		}

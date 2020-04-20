@@ -5,12 +5,12 @@ import packets.*;
 public class Race extends Thread{
 	private Client client;
 	public Race() {
-		client = new Client(this, "70.95.208.226");
-	}
+		client = new Client(this, "localhost");
+	}//70.95.208.226
 	
 	public void init() {
 		client.start();
-		String username = "andrew";
+		String username = "Daniel";
 		PacketLogin packet = new PacketLogin(username);
 		client.sendData(packet);
 		try {
