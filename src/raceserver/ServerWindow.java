@@ -2,44 +2,36 @@ package raceserver;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 
 public class ServerWindow extends JFrame {
 
-    ServerHandler server;
-    BufferedImage image;
-    public ServerWindow(String title, ServerHandler server){
+    ServerHandler serverHandler;
+    private DisconnectButton button0, button1;
+    public CustomGraphics graphics;
+
+    public ServerWindow(String title, ServerHandler serverHandler) {
         super(title);
-        this.server = server;
-        Graphics g = this.getGraphics();
+        this.serverHandler = serverHandler;
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(500, 500);
+        getContentPane().setPreferredSize(new Dimension(500, 500));
+        graphics = new CustomGraphics(this);
+
+        button0 = new DisconnectButton(0, serverHandler, 500/2-50, 500/4-10, 100, 20, Color.GRAY);
+        button1 = new DisconnectButton(1, serverHandler, 500/2-50, 500-500/4-10, 100, 20, Color.GRAY);
+
+        JLayeredPane layers = new JLayeredPane();
+        layers.setPreferredSize(new Dimension(500, 500));
+        layers.add(graphics, JLayeredPane.DEFAULT_LAYER);
+        layers.add(button0, JLayeredPane.POPUP_LAYER);
+        layers.add(button1, JLayeredPane.POPUP_LAYER);
+        setContentPane(layers);
+        pack();
+        setResizable(false);
         setVisible(true);
-        image = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_RGB);
     }
 
-    public void update(Graphics g){
-        paint(g);
-    }
 
-    public void paint(Graphics g){
-        updateImage();
-        g.drawImage(image, 0, 0, null);
-    }
-
-    private void updateImage(){
-        Graphics2D g2d = image.createGraphics();
-        g2d.setColor(Color.BLACK);
-        g2d.fillRect(0, 0, image.getWidth(), image.getHeight());
-        g2d.setColor(Color.YELLOW);
-        g2d.setFont(new Font("Arial", Font.PLAIN, 20));
-        for(int i = 0;i < 2;i++){
-            if(server.players[i] != null) {
-                g2d.drawString("Player " + (i+1) + ":" + server.players[i].username, 10, 50 + i*25);
-            }else{
-                g2d.drawString("Player " + (i+1) + " is empty", 10, 50 + i*25);
-            }
-        }
-        g2d.dispose();
-    }
 }
