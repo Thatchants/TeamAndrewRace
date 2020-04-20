@@ -10,7 +10,7 @@ public class Race extends Thread{
 	
 	public void init() {
 		client.start();
-		String username = "andrew";
+		String username = "Daniel";
 		PacketLogin packet = new PacketLogin(username);
 		client.sendData(packet);
 		try {
