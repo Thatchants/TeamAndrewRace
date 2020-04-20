@@ -3,6 +3,7 @@ package raceclient;
 import packets.*;
 import raceclient.display.RaceWindow;
 
+import java.awt.*;
 import java.net.UnknownHostException;
 
 public class Race extends Thread{
@@ -22,27 +23,21 @@ public class Race extends Thread{
 		long lastTime = System.nanoTime();
 		double nsPerTick = 1000000000D/60D;
 		double change = 0;
+		String lastIPCheck = "";
 		while(true) {
 			long currentTime = System.nanoTime();
 			change += (currentTime - lastTime)/nsPerTick;
 			lastTime = currentTime;
 			
 			while(change >= 1) {
-				window.repaint();
-				if(!window.loggedIn){
+				window.graphics.repaint();
+				if(!window.loggedIn && !lastIPCheck.equals(window.ipInput.getText())){
+					window.ipInput.setColor(Color.RED);
+					lastIPCheck = window.ipInput.getText();
 					try {
-						client.changeServerIP(window.ipInput.getText());
+						client.changeServerIP(lastIPCheck);
 						client.sendData(new PacketPing());
-						/*
-						If client receives ping packet, tell the RaceWindow.
-
-						Put the IPInput into the RaceWindow
-
-						IPInput is its own class cause possibly i can style it there?
-						 */
 					} catch (UnknownHostException e) {
-						window.validIP = false;
-						e.printStackTrace();
 					}
 				}
 				change--;

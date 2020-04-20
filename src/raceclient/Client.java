@@ -1,5 +1,6 @@
 package raceclient;
 
+import java.awt.*;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -46,7 +47,7 @@ public class Client extends Thread{
 		if(type.equals("0")) {//Ping
 			System.out.flush();
 			System.out.println("Received Pong from Server");
-			race.window.ping();
+			race.window.ipInput.setColor(Color.GREEN);
 		}else if(type.equals("1")) {
 			PacketLogin packet = new PacketLogin(data);
 			System.out.println("Logged in as " + packet.getUsername());
