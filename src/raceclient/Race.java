@@ -1,25 +1,21 @@
 package raceclient;
 
 import packets.*;
+import raceclient.display.RaceWindow;
+
+import java.awt.*;
+import java.net.UnknownHostException;
 
 public class Race extends Thread{
 	private Client client;
+	public RaceWindow window;
 	public Race() {
-		client = new Client(this, "localhost");
-	}//70.95.208.226
+		client = new Client(this, "default");
+		window = new RaceWindow("Race", this);
+	}
 	
 	public void init() {
 		client.start();
-		String username = "Daniel";
-		PacketLogin packet = new PacketLogin(username);
-		client.sendData(packet);
-		try {
-			Thread.sleep(25000);
-		}catch(Exception e){
-
-		}
-		PacketDisconnect disconnect = new PacketDisconnect(username);
-		client.sendData(disconnect);
 	}
 	
 	public void run() {
@@ -27,12 +23,24 @@ public class Race extends Thread{
 		long lastTime = System.nanoTime();
 		double nsPerTick = 1000000000D/60D;
 		double change = 0;
+		String lastIPCheck = "";
 		while(true) {
 			long currentTime = System.nanoTime();
 			change += (currentTime - lastTime)/nsPerTick;
 			lastTime = currentTime;
 			
 			while(change >= 1) {
+				window.graphics.repaint();
+				if(!window.loggedIn && !lastIPCheck.equals(window.ipInput.getText())){
+					window.ipInput.setColor(Color.RED);
+					lastIPCheck = window.ipInput.getText();
+					try {
+						client.changeServerIP(lastIPCheck);
+						client.sendData(new PacketPing());
+					} catch (UnknownHostException e) {
+					}
+				}
+				change--;
 			}
 		}
 	}
@@ -40,6 +48,11 @@ public class Race extends Thread{
 	public void receiveObstacle() {
 		obstacles++;
 		System.out.println(obstacles);
+	}
+
+	public void tryLogin(String username){
+		Packet PacketLogin = new PacketLogin(username);
+		client.sendData(PacketLogin);
 	}
 	
 	public static void main(String[] args) {
