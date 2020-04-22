@@ -9,6 +9,7 @@ import java.net.UnknownHostException;
 public class Race extends Thread{
 	private Client client;
 	public RaceWindow window;
+	public String username = "default username";
 	public Race() {
 		client = new Client(this, "default");
 		window = new RaceWindow("Race", this);
@@ -51,8 +52,13 @@ public class Race extends Thread{
 	}
 
 	public void tryLogin(String username){
-		Packet PacketLogin = new PacketLogin(username);
-		client.sendData(PacketLogin);
+		PacketLogin packet = new PacketLogin(username);
+		client.sendData(packet);
+	}
+
+	public void disconnect(){
+		PacketDisconnect packet = new PacketDisconnect(username);
+		client.sendData(packet);
 	}
 	
 	public static void main(String[] args) {

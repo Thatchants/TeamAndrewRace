@@ -27,9 +27,6 @@ public class DisconnectButton extends JPanel implements MouseListener {
         CustomGraphics.drawCenteredString(g,"Kick Player",new Rectangle(0,0,getWidth(),getHeight()),g.getFont());
     }
 
-    public Color getColor() {
-        return color;
-    }
 
 
 

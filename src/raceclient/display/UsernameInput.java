@@ -5,25 +5,21 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class IPInput extends JTextField implements MouseListener {
+public class UsernameInput extends JTextField implements MouseListener {
     private RaceWindow raceWindow;
-    public IPInput(RaceWindow raceWindow,int x,int y,int width,int height){
-        super("Enter Server IP");
-        this.raceWindow = raceWindow;
-        setBounds(x, y, width, height);
-        setFont(new Font("Courier", Font.PLAIN, 40));
-        setBackground(Color.RED);
+    public UsernameInput (RaceWindow raceWindow,int x,int y,int width, int height){
+        super("Enter Username");
+        this.raceWindow=raceWindow;
+        setBounds(x,y,width,height);
+        setFont(new Font("Courier",Font.PLAIN,40));
+        setBackground(Color.BLUE);
         addMouseListener(this);
-    }
-
-    public void setColor(Color color){
-        setBackground(color);
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        if(getText().equals("Enter Server IP"))
-        setText("");
+        if(getText().equals("Enter Username"))
+            setText("");
     }
 
     @Override
