@@ -18,6 +18,7 @@ public class Race extends Thread{
 	public Player player = new Player();
 
 
+	public String username = "default username";
 	public Race() {
 		client = new Client(this, "default");
 		window = new RaceWindow("Race", this);
@@ -65,8 +66,13 @@ public class Race extends Thread{
 	}
 
 	public void tryLogin(String username){
-		Packet PacketLogin = new PacketLogin(username);
-		client.sendData(PacketLogin);
+		PacketLogin packet = new PacketLogin(username);
+		client.sendData(packet);
+	}
+
+	public void disconnect(){
+		PacketDisconnect packet = new PacketDisconnect(username);
+		client.sendData(packet);
 	}
 	
 	public static void main(String[] args) {
