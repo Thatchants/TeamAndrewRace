@@ -12,7 +12,7 @@ public class RaceWindow extends JFrame implements MouseListener {
 
     public boolean loggedIn = false;
 
-    private Race race;
+    public Race race;
     public IPInput ipInput;
     public CustomGraphics graphics;
     public RaceWindow(String title, Race race){

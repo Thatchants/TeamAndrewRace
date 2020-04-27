@@ -2,13 +2,22 @@ package raceclient;
 
 import packets.*;
 import raceclient.display.RaceWindow;
+import raceclient.entities.Entity;
+import raceclient.entities.Obstacle;
+import raceclient.entities.Player;
 
 import java.awt.*;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 
 public class Race extends Thread{
 	private Client client;
 	public RaceWindow window;
+
+	public ArrayList<Entity>  entities= new ArrayList<>();
+	public Player player = new Player();
+
+
 	public Race() {
 		client = new Client(this, "default");
 		window = new RaceWindow("Race", this);
@@ -16,6 +25,7 @@ public class Race extends Thread{
 	
 	public void init() {
 		client.start();
+		entities.add(new Obstacle(490, 440, 15, 15, -3, player));
 	}
 	
 	public void run() {
@@ -30,6 +40,10 @@ public class Race extends Thread{
 			lastTime = currentTime;
 			
 			while(change >= 1) {
+				for(Entity e: entities){
+					e.tick();
+				}
+				player.tick();
 				window.graphics.repaint();
 				if(!window.loggedIn && !lastIPCheck.equals(window.ipInput.getText())){
 					window.ipInput.setColor(Color.RED);
