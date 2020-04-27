@@ -15,7 +15,8 @@ public class Race extends Thread{
 	public RaceWindow window;
 
 	public ArrayList<Entity>  entities= new ArrayList<>();
-	public Player player = new Player();
+	public Player player;
+	private boolean gameRunning = false;
 
 
 	public String username = "default username";
@@ -26,7 +27,6 @@ public class Race extends Thread{
 	
 	public void init() {
 		client.start();
-		entities.add(new Obstacle(490, 440, 15, 15, 0, player));
 	}
 	
 	public void run() {
@@ -41,10 +41,12 @@ public class Race extends Thread{
 			lastTime = currentTime;
 			
 			while(change >= 1) {
-				for(Entity e: entities){
-					e.tick();
+				if(gameRunning) {
+					for (Entity e : entities) {
+						e.tick();
+					}
+					player.tick();
 				}
-				player.tick();
 				window.graphics.repaint();
 				if(!window.loggedIn && !lastIPCheck.equals(window.ipInput.getText())){
 					window.ipInput.setColor(Color.RED);
@@ -73,6 +75,12 @@ public class Race extends Thread{
 	public void disconnect(){
 		PacketDisconnect packet = new PacketDisconnect(username);
 		client.sendData(packet);
+	}
+
+	public void startGame(){
+		player = new Player();
+		entities.add(new Obstacle(490, 440, 15, 15, -2, player));
+		gameRunning = true;
 	}
 	
 	public static void main(String[] args) {
