@@ -9,7 +9,7 @@ public class Player extends Entity{
     protected boolean grounded = false;
 
     public Player() {
-        super(0, 490, 20, 20);
+        super(0, 490, 10, 10);
         color = Color.BLUE;
     }
 

@@ -13,6 +13,7 @@ public class Obstacle extends Entity{
         this.xVel = xVel;
         prevX = x -xVel;
         color = Color.BLACK;
+        this.player = player;
     }
 
     @Override

@@ -32,7 +32,7 @@ public class CustomGraphics extends JPanel {
             for(Entity e: window.race.entities){
                 e.paintEntity(g2d, 0);
             }
-            window.race.player.tick();
+            window.race.player.paintEntity(g2d, 0);
         }else{
             g2d.setColor(Color.BLACK);
             g2d.fillRect(0, 0, image.getWidth(), image.getHeight());

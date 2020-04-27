@@ -26,7 +26,7 @@ public class Race extends Thread{
 	
 	public void init() {
 		client.start();
-		entities.add(new Obstacle(490, 440, 15, 15, -3, player));
+		entities.add(new Obstacle(490, 440, 15, 15, 0, player));
 	}
 	
 	public void run() {
