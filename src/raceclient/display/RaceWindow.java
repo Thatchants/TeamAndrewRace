@@ -6,12 +6,9 @@ import raceclient.Race;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
+import java.awt.event.*;
 
-public class RaceWindow extends JFrame implements WindowListener {
+public class RaceWindow extends JFrame implements WindowListener, KeyListener {
 
     public boolean loggedIn = false;
 
@@ -46,6 +43,8 @@ public class RaceWindow extends JFrame implements WindowListener {
         setResizable(false);
         setVisible(true);
         addWindowListener(this);
+        addKeyListener(this);
+        setFocusable(true);
     }
 
     public void loggedIn() {
@@ -101,5 +100,30 @@ public class RaceWindow extends JFrame implements WindowListener {
     @Override
     public void windowDeactivated(WindowEvent e) {
 
+    }
+
+    @Override
+    public void keyTyped(KeyEvent keyEvent) {
+
+    }
+
+    private boolean spacePressed = false;
+
+    @Override
+    public void keyPressed(KeyEvent keyEvent) {
+        System.out.println("key pressed");
+        if(keyEvent.getKeyChar() == ' ' && spacePressed == false){
+            spacePressed = true;
+            if(loggedIn) {
+                race.player.jump();
+            }
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent keyEvent) {
+        if(keyEvent.getKeyChar() == ' ') {
+            spacePressed = false;
+        }
     }
 }

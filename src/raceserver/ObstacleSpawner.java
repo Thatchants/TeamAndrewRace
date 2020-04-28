@@ -9,7 +9,7 @@ public class ObstacleSpawner extends Thread{
 	}
 	public void run() {
 		long lastTime = System.nanoTime();
-		double nsPerTick = 1000000000D/60D;
+		double nsPerTick = 100000000000D/60D;
 		double change = 0;
 		while(true) {
 			long currentTime = System.nanoTime();

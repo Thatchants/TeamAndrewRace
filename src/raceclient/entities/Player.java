@@ -6,10 +6,10 @@ public class Player extends Entity{
 
     protected double prevY;
     protected double prevYVel;
-    protected boolean grounded = false;
+    protected boolean grounded = true;
 
     public Player() {
-        super(0, 490, 10, 10);
+        super(25, 470, 10, 10);
         color = Color.BLUE;
     }
 
@@ -18,9 +18,11 @@ public class Player extends Entity{
         prevY = y;
         prevYVel = yVel;
         updateLocation();
+        if(y > 470)ground(480);
     }
 
     public void jump(){
+        System.out.println("jump");
         if(grounded){
             this.yVel = -10;
             deGround();
