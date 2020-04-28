@@ -111,7 +111,6 @@ public class RaceWindow extends JFrame implements WindowListener, KeyListener {
 
     @Override
     public void keyPressed(KeyEvent keyEvent) {
-        System.out.println("key pressed");
         if(keyEvent.getKeyChar() == ' ' && spacePressed == false){
             spacePressed = true;
             if(loggedIn) {

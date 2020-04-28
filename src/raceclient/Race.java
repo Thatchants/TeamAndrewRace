@@ -64,7 +64,7 @@ public class Race extends Thread{
 	private int obstacles = 0;
 	public void receiveObstacle() {
 		obstacles++;
-		System.out.println(obstacles);
+		//System.out.println(obstacles);
 	}
 
 	public void tryLogin(String username){
@@ -79,7 +79,7 @@ public class Race extends Thread{
 
 	public void startGame(){
 		player = new Player();
-		entities.add(new Obstacle(490, 440, 15, 15, -2, player));
+		entities.add(new Obstacle(440, player));
 		gameRunning = true;
 	}
 	

@@ -9,7 +9,7 @@ public class Player extends Entity{
     protected boolean grounded = true;
 
     public Player() {
-        super(25, 470, 10, 10);
+        super(25, 470, 20, 20);
         color = Color.BLUE;
     }
 
@@ -18,11 +18,12 @@ public class Player extends Entity{
         prevY = y;
         prevYVel = yVel;
         updateLocation();
-        if(y > 470)ground(480);
+        if(!grounded)yVel += .7;
+        if(y >= 470)ground(480);
     }
 
     public void jump(){
-        System.out.println("jump");
+        System.out.println("yvel: " + yVel + " y: " + y + " grounded: " + grounded);
         if(grounded){
             this.yVel = -10;
             deGround();
