@@ -50,13 +50,16 @@ public class Client extends Thread{
 			race.window.ipInput.setColor(Color.GREEN);
 		}else if(type.equals("1")) {
 			PacketLogin packet = new PacketLogin(data);
+			race.startGame();
 			System.out.println("Logged in as " + packet.getUsername());
 			race.window.loggedIn();
 		}else if(type.equals("2")){
 			System.out.println("Disconnected");
 			race.window.loggedOut();
 		}else if(type.equals("3")) {
-			race.receiveObstacle();
+			race.receiveObstacle(new PacketObstacle(data));
+		}else if(type.equals("4")){
+			race.otherPlayer.positionToPacket(new PacketPlayerInfo(data));
 		}
 	}
 	

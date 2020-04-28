@@ -11,19 +11,24 @@ public class ObstacleSpawner extends Thread{
 		long lastTime = System.nanoTime();
 		double nsPerTick = 1000000000D/60D;
 		double change = 0;
+		int spawnRate = 100;
 		while(true) {
 			long currentTime = System.nanoTime();
 			change += (currentTime - lastTime)/nsPerTick;
 			lastTime = currentTime;
 			
 			while(change >= 1) {
-				spawn();
+				if(spawnRate == 0) {
+					spawn();
+					spawnRate = 50;
+				}
+				spawnRate--;
 				change--;
 			}
 		}
 	}
 	
 	private void spawn() {
-		server.sendDataAll(new PacketObstacle());
+		server.sendDataAll(new PacketObstacle("430"));
 	}
 }

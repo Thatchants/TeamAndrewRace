@@ -46,6 +46,9 @@ public class Server extends Thread{
 		}else if(type.equals("2")){
 			PacketDisconnect packet = new PacketDisconnect(data);
 			serverHandler.removePlayer(packet, address, port);
+		}else if(type.equals("4")){
+			PacketPlayerInfo packet = new PacketPlayerInfo(data);
+			sendDataOther(packet);
 		}
 	}
 	
@@ -58,17 +61,20 @@ public class Server extends Thread{
 			e.printStackTrace();
 		}
 	}
+
+	public void sendDataOther(PacketPlayerInfo packet){
+		for(PlayerMP p: serverHandler.players){
+			if(p != null && !p.username.equals(packet.getUsername())){
+				sendData(packet, p.address, p.port);
+			}
+		}
+	}
 	
 	public void sendDataAll(Packet packet) {
 		byte[] data = packet.getData();
 		for(PlayerMP p: serverHandler.players) {
 			if(p != null) {
-				DatagramPacket sendPacket = new DatagramPacket(data, data.length, p.address, p.port);
-				try {
-					this.socket.send(sendPacket);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+				sendData(packet, p.address, p.port);
 			}
 		}
 	}

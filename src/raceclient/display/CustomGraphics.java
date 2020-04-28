@@ -1,5 +1,7 @@
 package raceclient.display;
 
+import raceclient.entities.Entity;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -7,8 +9,7 @@ import java.awt.image.BufferedImage;
 public class CustomGraphics extends JPanel {
     private BufferedImage image;
     private RaceWindow window;
-
-    public CustomGraphics(RaceWindow window) {
+    public CustomGraphics(RaceWindow window){
         this.window = window;
         setSize(new Dimension(500, 500));
         image = new BufferedImage(this.getWidth(), this.getHeight(), BufferedImage.TYPE_INT_RGB);
@@ -25,13 +26,22 @@ public class CustomGraphics extends JPanel {
 
     private void updateImage() {
         Graphics2D g2d = image.createGraphics();
-        if (window.loggedIn)
+        if(window.loggedIn) {
             g2d.setColor(Color.GREEN);
-        else
-            g2d.setColor(new Color(121, 13, 121));
-
-        g2d.fillRect(0, 0, image.getWidth(), image.getHeight());
-
+            g2d.fillRect(0, 0, image.getWidth(), image.getHeight());
+            for(Entity e: window.race.entities){
+                e.paintEntity(g2d, 0);
+                e.paintEntity(g2d, 250);
+            }
+            window.race.player.paintEntity(g2d, 0);
+            window.race.otherPlayer.paintEntity(g2d, 250);
+            g2d.setColor(new Color(128, 76, 5));
+            g2d.fillRect(0, 480, 500, 20);
+            g2d.fillRect(0, 230, 500, 20);
+        }else{
+            g2d.setColor(Color.BLACK);
+            g2d.fillRect(0, 0, image.getWidth(), image.getHeight());
+        }
         g2d.dispose();
     }
 
