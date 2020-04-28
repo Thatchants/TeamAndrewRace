@@ -31,8 +31,13 @@ public class CustomGraphics extends JPanel {
             g2d.fillRect(0, 0, image.getWidth(), image.getHeight());
             for(Entity e: window.race.entities){
                 e.paintEntity(g2d, 0);
+                e.paintEntity(g2d, 250);
             }
             window.race.player.paintEntity(g2d, 0);
+            window.race.otherPlayer.paintEntity(g2d, 250);
+            g2d.setColor(new Color(128, 76, 5));
+            g2d.fillRect(0, 480, 500, 20);
+            g2d.fillRect(0, 230, 500, 20);
         }else{
             g2d.setColor(Color.BLACK);
             g2d.fillRect(0, 0, image.getWidth(), image.getHeight());

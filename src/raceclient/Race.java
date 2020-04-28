@@ -4,11 +4,13 @@ import packets.*;
 import raceclient.display.RaceWindow;
 import raceclient.entities.Entity;
 import raceclient.entities.Obstacle;
+import raceclient.entities.OtherPlayer;
 import raceclient.entities.Player;
 
 import java.awt.*;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Race extends Thread{
 	private Client client;
@@ -16,6 +18,7 @@ public class Race extends Thread{
 
 	public ArrayList<Entity>  entities= new ArrayList<>();
 	public Player player;
+	public OtherPlayer otherPlayer;
 	private boolean gameRunning = false;
 
 
@@ -42,10 +45,15 @@ public class Race extends Thread{
 			
 			while(change >= 1) {
 				if(gameRunning) {
-					for (Entity e : entities) {
+					for(Iterator<Entity> itr = entities.iterator(); itr.hasNext();){
+						Obstacle e = (Obstacle)itr.next();
 						e.tick();
+						if(e.killMe){
+							itr.remove();
+						}
 					}
 					player.tick();
+					client.sendData(player.generateLocationPacket(username));
 				}
 				window.graphics.repaint();
 				if(!window.loggedIn && !lastIPCheck.equals(window.ipInput.getText())){
@@ -61,10 +69,8 @@ public class Race extends Thread{
 			}
 		}
 	}
-	private int obstacles = 0;
-	public void receiveObstacle() {
-		obstacles++;
-		//System.out.println(obstacles);
+	public void receiveObstacle(PacketObstacle packet) {
+		entities.add(new Obstacle(Double.parseDouble(packet.getY()), player));
 	}
 
 	public void tryLogin(String username){
@@ -79,7 +85,7 @@ public class Race extends Thread{
 
 	public void startGame(){
 		player = new Player();
-		entities.add(new Obstacle(440, player));
+		otherPlayer = new OtherPlayer();
 		gameRunning = true;
 	}
 	

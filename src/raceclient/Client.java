@@ -57,7 +57,9 @@ public class Client extends Thread{
 			System.out.println("Disconnected");
 			race.window.loggedOut();
 		}else if(type.equals("3")) {
-			race.receiveObstacle();
+			race.receiveObstacle(new PacketObstacle(data));
+		}else if(type.equals("4")){
+			race.otherPlayer.positionToPacket(new PacketPlayerInfo(data));
 		}
 	}
 	

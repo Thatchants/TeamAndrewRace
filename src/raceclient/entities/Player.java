@@ -1,5 +1,7 @@
 package raceclient.entities;
 
+import packets.PacketPlayerInfo;
+
 import java.awt.*;
 
 public class Player extends Entity{
@@ -9,7 +11,7 @@ public class Player extends Entity{
     protected boolean grounded = true;
 
     public Player() {
-        super(25, 470, 20, 20);
+        super(25, 460, 20, 20);
         color = Color.BLUE;
     }
 
@@ -19,7 +21,7 @@ public class Player extends Entity{
         prevYVel = yVel;
         updateLocation();
         if(!grounded)yVel += .7;
-        if(y >= 470)ground(480);
+        if(y >= 460)ground(480);
     }
 
     public void jump(){
@@ -40,5 +42,9 @@ public class Player extends Entity{
     public void deGround(){
         //TODO send server a packet
         grounded = false;
+    }
+
+    public PacketPlayerInfo generateLocationPacket(String username){
+        return new PacketPlayerInfo("" + y, username);
     }
 }

@@ -7,8 +7,9 @@ public class Obstacle extends Entity{
     private double prevX;
     private boolean playerGrounded = false;
     private Player player;
+    public boolean killMe = false;
 
-    public Obstacle(int y, Player player) {
+    public Obstacle(double y, Player player) {
         super(490, y, 25, 25);
         this.xVel = -2;
         prevX = x -xVel;
@@ -20,9 +21,7 @@ public class Obstacle extends Entity{
     public void tick() {
         if(playerGrounded && player.y + player.height < y)playerGrounded = false;
         if((x >= player.x && x < player.x + player.width) || (player.x >= x && player.x < x + width)){//Obstacle is in the player's possible area
-            System.out.println("can collide");
             if((y >= player.y && y < player.y + player.height) || (player.y >= y && player.y < y + height)){//They are inside of each other
-                System.out.println("inside");
                 handleCollision();
             }
         }else if(playerGrounded && x+width < player.x){//moved out of player's region
@@ -30,6 +29,7 @@ public class Obstacle extends Entity{
         }
         prevX = x;
         updateLocation();
+        if(x + width <=0)killMe = true;
     }
 
     private void handleCollision(){
@@ -39,6 +39,7 @@ public class Obstacle extends Entity{
             if(playerDist > obstacleDist){
                 playerGrounded = true;
                 player.ground(y);
+                System.out.println("land");
                 return;
             }
         }else{
