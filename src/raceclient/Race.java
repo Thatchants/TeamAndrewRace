@@ -52,7 +52,7 @@ public class Race extends Thread{
 					for(Iterator<Entity> itr = entities.iterator(); itr.hasNext();){
 						Obstacle e = (Obstacle)itr.next();
 						e.tick();
-						if(e.killMe || gameLostTicks > 0 || gameWonTicks > 0){// or gamewonticks >0
+						if(e.killMe || gameLostTicks > 0){// or gamewonticks >0
 							itr.remove();
 						}
 					}
