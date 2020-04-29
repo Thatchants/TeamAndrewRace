@@ -4,6 +4,8 @@ import java.net.InetAddress;
 
 import packets.PacketDisconnect;
 import packets.PacketLogin;
+import raceserver.display.ServerWindow;
+import raceserver.obstacle.ObstacleSpawner;
 
 public class ServerHandler extends Thread{
 	public Server server;

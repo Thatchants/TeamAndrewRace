@@ -1,14 +1,12 @@
-package raceserver;
+package raceserver.display;
 
 import packets.PacketDisconnect;
+import raceserver.ServerHandler;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import java.awt.image.BufferedImage;
 
 public class ServerWindow extends JFrame implements WindowListener {
 

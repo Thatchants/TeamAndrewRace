@@ -1,6 +1,8 @@
-package raceserver;
+package raceserver.obstacle;
 
 import packets.PacketObstacle;
+import raceserver.Server;
+import raceserver.ServerHandler;
 
 public class ObstacleSpawner extends Thread{
 	Server server;
@@ -33,7 +35,7 @@ public class ObstacleSpawner extends Thread{
 		if(serverHandler.players[0] != null && serverHandler.players[1] != null) {
 			String[] combo = ObstacleCombos.randomCombo();
 			server.sendDataAll(new PacketObstacle(combo));
-			return ObstacleCombos.comboSize(combo)/2 + 75;
+			return ObstacleCombos.comboSize(combo)/2 + 50;
 		}
 		return 0;
 	}

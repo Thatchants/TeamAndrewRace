@@ -25,7 +25,6 @@ public class Player extends Entity{
     }
 
     public void jump(){
-        System.out.println("yvel: " + yVel + " y: " + y + " grounded: " + grounded);
         if(grounded){
             this.yVel = -10;
             deGround();
