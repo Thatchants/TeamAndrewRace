@@ -74,7 +74,12 @@ public class Race extends Thread{
 		}
 	}
 	public void receiveObstacle(PacketObstacle packet) {
-		entities.add(new Obstacle(Double.parseDouble(packet.getY()), player, this));
+		for(int i = 0;i < packet.getObstacleInfo().length;i+= 3){
+			double x = Double.parseDouble(packet.getObstacleInfo()[i]);
+			double y = Double.parseDouble(packet.getObstacleInfo()[i+1]);
+			boolean isPlatform = Boolean.parseBoolean(packet.getObstacleInfo()[i+2]);
+			entities.add(new Obstacle(x, y, player, this, isPlatform));
+		}
 	}
 
 	public void tryLogin(String username){

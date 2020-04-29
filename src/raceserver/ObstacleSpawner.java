@@ -32,7 +32,7 @@ public class ObstacleSpawner extends Thread{
 	
 	private void spawn() {
 		if(serverHandler.players[0] != null && serverHandler.players[1] != null) {
-			server.sendDataAll(new PacketObstacle("430"));
+			server.sendDataAll(new PacketObstacle(ObstacleCombos.combo1));
 		}
 	}
 }
