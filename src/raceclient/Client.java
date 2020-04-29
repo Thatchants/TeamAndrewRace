@@ -60,6 +60,8 @@ public class Client extends Thread{
 			race.receiveObstacle(new PacketObstacle(data));
 		}else if(type.equals("4")){
 			race.otherPlayer.positionToPacket(new PacketPlayerInfo(data));
+		}else if(type.equals("5")){
+			race.winGame();
 		}
 	}
 	

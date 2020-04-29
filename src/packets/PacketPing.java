@@ -7,4 +7,9 @@ public class PacketPing extends Packet{
 		return ("0").getBytes();
 	}
 
+	@Override
+	public String getUsername() {
+		return null;
+	}
+
 }

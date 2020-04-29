@@ -13,7 +13,7 @@ public class ServerHandler extends Thread{
 	public ServerHandler() {
 		players = new PlayerMP[2];
 		server = new Server(this);
-		spawner = new ObstacleSpawner(server);
+		spawner = new ObstacleSpawner(server, this);
 		window = new ServerWindow("Server", this);
 	}
 	

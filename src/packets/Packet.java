@@ -11,4 +11,6 @@ public abstract class Packet {
 		String message = new String(data).trim();
 		return message.substring(1);
 	}
+
+    public abstract String getUsername();
 }

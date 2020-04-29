@@ -1,5 +1,7 @@
 package raceclient.entities;
 
+import raceclient.Race;
+
 import java.awt.*;
 
 public class Obstacle extends Entity{
@@ -8,13 +10,15 @@ public class Obstacle extends Entity{
     private boolean playerGrounded = false;
     private Player player;
     public boolean killMe = false;
+    private Race race;
 
-    public Obstacle(double y, Player player) {
+    public Obstacle(double y, Player player, Race race) {
         super(490, y, 25, 25);
         this.xVel = -2;
         prevX = x -xVel;
         color = Color.BLACK;
         this.player = player;
+        this.race = race;
     }
 
     @Override
@@ -35,15 +39,14 @@ public class Obstacle extends Entity{
     private void handleCollision(){
         if(player.prevY + player.height <= y){
             double playerDist = (y -(player.prevY + player.height))/player.prevYVel;
-            double obstacleDist = -(x - (player.x + player.width))/xVel;
+            double obstacleDist = -(prevX - (player.x + player.width))/xVel;
             if(playerDist > obstacleDist){
                 playerGrounded = true;
                 player.ground(y);
-                System.out.println("land");
                 return;
             }
         }else{
-            System.out.println("game over");
+            race.loseGame();
         }
     }
 }
