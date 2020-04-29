@@ -37,7 +37,6 @@ public class Server extends Thread{
 		String message = new String(data).trim();
 		String type = message.substring(0,1);
 		if(type.equals("0")) {//Ping
-			System.out.println("Received Ping from Client");
 			PacketPing packet = new PacketPing();
 			sendData(packet, address, port);
 		}else if(type.equals("1")) {

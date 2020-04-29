@@ -48,7 +48,6 @@ public class RaceWindow extends JFrame implements WindowListener, KeyListener {
     }
 
     public void loggedIn() {
-        System.out.println("in");
         loggedIn = true;
         layers.remove(joinButton);
         layers.remove(ipInput);
@@ -57,7 +56,6 @@ public class RaceWindow extends JFrame implements WindowListener, KeyListener {
 
     public void loggedOut() {
         if (loggedIn != false) {
-            System.out.println("out");
             loggedIn = false;
             layers.add(ipInput, JLayeredPane.POPUP_LAYER);
             layers.add(usernameInput, JLayeredPane.POPUP_LAYER);

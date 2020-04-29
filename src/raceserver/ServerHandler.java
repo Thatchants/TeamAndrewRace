@@ -45,7 +45,6 @@ public class ServerHandler extends Thread{
 				int other = i==0 ? 1 : 0;
 				if(!(players[other] != null && packet.getUsername().equals(players[other].username))) {
 					players[i] = new PlayerMP(packet, address, port);
-					System.out.println(players[i].username + " logged in as player " + (i+1));
 					server.sendData(packet, address, port);
 				}
 			}
@@ -55,7 +54,6 @@ public class ServerHandler extends Thread{
 	public void removePlayer(PacketDisconnect packet, InetAddress address, int port){
 		for(int i = 0;i<2;i++){
 			if(players[i] != null && players[i].username.equals(packet.getUsername())){
-				System.out.println(players[i].username + " disconnected as player " + (i+1));
 				players[i] = null;
 				server.sendData(packet, address, port);
 			}

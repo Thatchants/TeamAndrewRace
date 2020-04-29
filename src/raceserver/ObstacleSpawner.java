@@ -13,26 +13,28 @@ public class ObstacleSpawner extends Thread{
 		long lastTime = System.nanoTime();
 		double nsPerTick = 1000000000D/60D;
 		double change = 0;
-		int spawnRate = 100;
+		int ticksToNextCombo = 0;
 		while(true) {
 			long currentTime = System.nanoTime();
 			change += (currentTime - lastTime)/nsPerTick;
 			lastTime = currentTime;
-			
 			while(change >= 1) {
-				if(spawnRate == 0) {
-					spawn();
-					spawnRate = 50;
+				if(ticksToNextCombo <= 0) {
+					ticksToNextCombo = spawn();
+				}else{
+					ticksToNextCombo --;
 				}
-				spawnRate--;
 				change--;
 			}
 		}
 	}
 	
-	private void spawn() {
+	private int spawn() {
 		if(serverHandler.players[0] != null && serverHandler.players[1] != null) {
-			server.sendDataAll(new PacketObstacle(ObstacleCombos.combo1));
+			String[] combo = ObstacleCombos.randomCombo();
+			server.sendDataAll(new PacketObstacle(combo));
+			return ObstacleCombos.comboSize(combo)/2 + 75;
 		}
+		return 0;
 	}
 }
