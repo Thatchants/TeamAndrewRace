@@ -29,6 +29,9 @@ public class CustomGraphics extends JPanel {
         if(window.loggedIn) {
             g2d.setColor(Color.GREEN);
             g2d.fillRect(0, 0, image.getWidth(), image.getHeight());
+            g2d.setColor(new Color(59, 7, 4));
+            if(window.race.gameWonTicks > 0)g2d.fillRect(0, 0, image.getWidth(), image.getHeight()/2);
+            if(window.race.gameLostTicks > 0)g2d.fillRect(0, image.getHeight()/2, image.getWidth(), image.getHeight()/2);
             for(Entity e: window.race.entities){
                 e.paintEntity(g2d, 0);
                 e.paintEntity(g2d, 250);

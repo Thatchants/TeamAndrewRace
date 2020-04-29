@@ -4,8 +4,10 @@ import packets.PacketObstacle;
 
 public class ObstacleSpawner extends Thread{
 	Server server;
-	public ObstacleSpawner(Server server) {
+	ServerHandler serverHandler;
+	public ObstacleSpawner(Server server, ServerHandler serverHandler) {
 		this.server = server;
+		this.serverHandler = serverHandler;
 	}
 	public void run() {
 		long lastTime = System.nanoTime();
@@ -29,6 +31,8 @@ public class ObstacleSpawner extends Thread{
 	}
 	
 	private void spawn() {
-		server.sendDataAll(new PacketObstacle("430"));
+		if(serverHandler.players[0] != null && serverHandler.players[1] != null) {
+			server.sendDataAll(new PacketObstacle("430"));
+		}
 	}
 }

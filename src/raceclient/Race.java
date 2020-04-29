@@ -20,6 +20,8 @@ public class Race extends Thread{
 	public Player player;
 	public OtherPlayer otherPlayer;
 	private boolean gameRunning = false;
+	public int gameLostTicks = 0;
+	public int gameWonTicks = 0;
 
 
 	public String username = "default username";
@@ -44,11 +46,13 @@ public class Race extends Thread{
 			lastTime = currentTime;
 			
 			while(change >= 1) {
+				if(gameLostTicks > 0)gameLostTicks --;
+				if(gameWonTicks > 0)gameWonTicks --;
 				if(gameRunning) {
 					for(Iterator<Entity> itr = entities.iterator(); itr.hasNext();){
 						Obstacle e = (Obstacle)itr.next();
 						e.tick();
-						if(e.killMe){
+						if(e.killMe || gameLostTicks > 0 || gameWonTicks > 0){
 							itr.remove();
 						}
 					}
@@ -70,7 +74,7 @@ public class Race extends Thread{
 		}
 	}
 	public void receiveObstacle(PacketObstacle packet) {
-		entities.add(new Obstacle(Double.parseDouble(packet.getY()), player));
+		entities.add(new Obstacle(Double.parseDouble(packet.getY()), player, this));
 	}
 
 	public void tryLogin(String username){
@@ -87,6 +91,15 @@ public class Race extends Thread{
 		player = new Player();
 		otherPlayer = new OtherPlayer();
 		gameRunning = true;
+	}
+
+	public void loseGame(){
+		client.sendData(new PacketLoseWin(username));
+		gameLostTicks = 100;
+	}
+
+	public void winGame(){
+		gameWonTicks = 100;
 	}
 	
 	public static void main(String[] args) {

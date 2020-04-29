@@ -17,6 +17,11 @@ public class PacketObstacle extends Packet{
 		return ("3" + y).getBytes();
 	}
 
+	@Override
+	public String getUsername() {
+		return null;
+	}
+
 	public String getY() {
 		return y;
 	}

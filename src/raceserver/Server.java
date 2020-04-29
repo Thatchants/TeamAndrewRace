@@ -49,6 +49,9 @@ public class Server extends Thread{
 		}else if(type.equals("4")){
 			PacketPlayerInfo packet = new PacketPlayerInfo(data);
 			sendDataOther(packet);
+		}else if(type.equals("5")){
+			PacketLoseWin packet = new PacketLoseWin(data);
+			sendDataOther(packet);
 		}
 	}
 	
@@ -62,7 +65,7 @@ public class Server extends Thread{
 		}
 	}
 
-	public void sendDataOther(PacketPlayerInfo packet){
+	public void sendDataOther(Packet packet){
 		for(PlayerMP p: serverHandler.players){
 			if(p != null && !p.username.equals(packet.getUsername())){
 				sendData(packet, p.address, p.port);
