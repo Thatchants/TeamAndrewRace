@@ -11,12 +11,18 @@ public class Obstacle extends Entity{
     private Player player;
     public boolean killMe = false;
     private Race race;
+    private boolean isPlatform;
 
-    public Obstacle(double y, Player player, Race race) {
-        super(490, y, 25, 25);
+    public Obstacle(double x, double y, Player player, Race race, boolean isPlatform) {
+        super(x, y, 25, 25);
         this.xVel = -2;
         prevX = x -xVel;
-        color = Color.BLACK;
+        this.isPlatform = isPlatform;
+        if(isPlatform) {
+            color = Color.BLACK;
+        }else{
+            color = Color.YELLOW;
+        }
         this.player = player;
         this.race = race;
     }
@@ -37,7 +43,7 @@ public class Obstacle extends Entity{
     }
 
     private void handleCollision(){
-        if(player.prevY + player.height <= y){
+        if(player.prevY + player.height <= y && isPlatform){
             double playerDist = (y -(player.prevY + player.height))/player.prevYVel;
             double obstacleDist = -(prevX - (player.x + player.width))/xVel;
             if(playerDist > obstacleDist){

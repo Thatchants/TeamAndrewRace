@@ -16,7 +16,6 @@ public class OtherPlayer extends Entity{
     }
 
     public void positionToPacket(PacketPlayerInfo packet){
-        System.out.println(packet.getY());
         y = Double.parseDouble(packet.getY());
     }
 }

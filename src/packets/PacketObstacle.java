@@ -2,19 +2,32 @@ package packets;
 
 public class PacketObstacle extends Packet{
 
-	private String y;
+	private String[] obstacleInfo;
 
-	public PacketObstacle(String y) {
-		this.y = y;
+	public PacketObstacle(String[] obstacleInfo) {
+		this.obstacleInfo = new String[obstacleInfo.length];
+		for(int i = 0; i < obstacleInfo.length;i++){
+			this.obstacleInfo[i] = obstacleInfo[i];
+		}
 	}
 
 	public PacketObstacle(byte[] data) {
 		String[] dataElements = Packet.readData(data).split(",");
-		this.y = dataElements[0];
+		this.obstacleInfo = new String[dataElements.length];
+		for(int i = 0; i < dataElements.length;i++){
+			this.obstacleInfo[i] = dataElements[i];
+		}
 	}
 
 	public byte[] getData() {
-		return ("3" + y).getBytes();
+		String byteString = "3";
+		for(int i = 0; i < obstacleInfo.length;i++){
+			byteString = byteString + obstacleInfo[i];
+			if(i != obstacleInfo.length-1){
+				byteString = byteString + ",";
+			}
+		}
+		return (byteString).getBytes();
 	}
 
 	@Override
@@ -22,7 +35,7 @@ public class PacketObstacle extends Packet{
 		return null;
 	}
 
-	public String getY() {
-		return y;
+	public String[] getObstacleInfo(){
+		return obstacleInfo;
 	}
 }

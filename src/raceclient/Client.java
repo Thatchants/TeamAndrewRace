@@ -45,16 +45,12 @@ public class Client extends Thread{
 		String message = new String(data).trim();
 		String type = message.substring(0,1);
 		if(type.equals("0")) {//Ping
-			System.out.flush();
-			System.out.println("Received Pong from Server");
 			race.window.ipInput.setColor(Color.GREEN);
 		}else if(type.equals("1")) {
 			PacketLogin packet = new PacketLogin(data);
 			race.startGame();
-			System.out.println("Logged in as " + packet.getUsername());
 			race.window.loggedIn();
 		}else if(type.equals("2")){
-			System.out.println("Disconnected");
 			race.window.loggedOut();
 		}else if(type.equals("3")) {
 			race.receiveObstacle(new PacketObstacle(data));
