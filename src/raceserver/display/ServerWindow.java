@@ -1,6 +1,7 @@
-package raceserver;
+package raceserver.display;
 
 import packets.PacketDisconnect;
+import raceserver.ServerHandler;
 
 import javax.swing.*;
 import java.awt.*;

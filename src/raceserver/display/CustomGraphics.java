@@ -1,4 +1,4 @@
-package raceserver;
+package raceserver.display;
 
 import javax.swing.*;
 import java.awt.*;
@@ -6,7 +6,6 @@ import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.InetAddress;
 import java.net.URL;
 
 public class CustomGraphics extends JPanel {

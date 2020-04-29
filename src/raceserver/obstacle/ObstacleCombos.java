@@ -1,4 +1,4 @@
-package raceserver;
+package raceserver.obstacle;
 
 import java.util.Random;
 

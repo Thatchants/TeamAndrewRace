@@ -1,6 +1,8 @@
-package raceserver;
+package raceserver.obstacle;
 
 import packets.PacketObstacle;
+import raceserver.Server;
+import raceserver.ServerHandler;
 
 public class ObstacleSpawner extends Thread{
 	Server server;
